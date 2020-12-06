@@ -1,6 +1,7 @@
 # Sleepy Weather
 
 **Starting from absolute zero and assuming nothing about my knowledge of UX Design**
+
 Challenge from Marg: [This gist](https://gist.github.com/margueriteroth/6823fcc6eeec9c11d9162a6d22c7fb0e)
 
 ## Notes so far (last updated 12/6/2020)
