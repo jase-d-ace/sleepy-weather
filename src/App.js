@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
+import { callAPI } from './services'
 
+console.log(process.env)
 function App() {
   return (
     <div className="App">
@@ -17,6 +19,7 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={callAPI}>Click Me</button>
       </header>
     </div>
   );
