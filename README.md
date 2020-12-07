@@ -11,3 +11,4 @@ Challenge from Marg: [This gist](https://gist.github.com/margueriteroth/6823fcc6
   * A list of similar looking components that only show high/low temps at first, then expand for more information
   * Most important information is bigger and more prominent
   * Key information: Daily high/low temps, humidity, precipitation chance, wind speed
+  * [Visual Crossing Weather API](https://www.visualcrossing.com/resources/documentation/weather-api/weather-api-documentation/)
