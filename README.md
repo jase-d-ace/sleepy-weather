@@ -4,7 +4,7 @@
 
 Challenge from Marg: [This gist](https://gist.github.com/margueriteroth/6823fcc6eeec9c11d9162a6d22c7fb0e)
 
-## Notes so far (last updated 12/6/2020)
+## Notes so far (last updated 12/07/2020)
 
 * Inspiration: weather.com, accuweather.com, ny1.com
 * Common UX concepts:
