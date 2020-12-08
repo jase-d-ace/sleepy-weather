@@ -15,3 +15,4 @@
   * A list of similar looking components that only show high/low temps at first, then expand for more information
   * Most important information is bigger and more prominent
   * Key information: Daily high/low temps, humidity, precipitation chance, wind speed
+* Will provide an "Overnight" metric that shows a high and low temp for the hours between 6p-6a for days in the next week
