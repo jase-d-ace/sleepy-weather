@@ -11,8 +11,8 @@ function App() {
   useEffect(() => {
     if (responseData) {
       if (!responseData.address) {
-        setResponseData(null);
         setError(responseData);
+        setResponseData(null);
       }
     }
   })
