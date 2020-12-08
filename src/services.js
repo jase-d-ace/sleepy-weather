@@ -1,4 +1,3 @@
-import _ from 'underscore'
 const API_BASE_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?"
 
 export const handleFormSubmit = (e, locationString, callback) => {
@@ -19,4 +18,4 @@ export const handleFormSubmit = (e, locationString, callback) => {
   .catch(err => callback(err))
 }
 
-export const handleFormInput = (callback, callbackArg) => (_.debounce(() => callback(callbackArg), 70))()
+export const handleFormInput = (callback, callbackArg) => callback(callbackArg)
