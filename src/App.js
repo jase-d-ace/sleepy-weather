@@ -1,26 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
-import { callAPI } from './services'
+import { useState } from 'react';
+import { callAPI, handleFormSubmit, handleFormInput } from './services';
 
-console.log(process.env)
 function App() {
+  const [locationString, setLocationString] = useState(null);
+  console.log(locationString)
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button onClick={callAPI}>Click Me</button>
       </header>
+      <form onSubmit={(e) => handleFormSubmit(e, locationString, callAPI)}>
+        <input type="text" placeholder="enter location" onChange={(e) => handleFormInput(setLocationString, e.target.value)} />
+        <input type="submit" value="Click me" /> 
+      </form>
     </div>
   );
 }
