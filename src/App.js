@@ -8,7 +8,7 @@ function App() {
     const [responseData, setResponseData] = useState(null);
     const [weeklyTempsByTime, setWeeklyTempsByTime] = useState(null)
     // const [weeklyHighsAndLows, setWeeklyHighsAndLows] = useState(null)
-    // const [overnights, setOvernights] = useState(null)
+    const [overnights, setOvernights] = useState(null)
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -31,8 +31,32 @@ function App() {
                     return hash;
                 }, {});
                 const groupedByDay = Object.keys(hourHash).map(hour => hourHash[hour]);
-                setWeeklyTempsByTime(groupedByDay)
-                console.log(weeklyTempsByTime)
+
+                const groupedByTime = groupedByDay.map((day) => {
+                    let mornings = [];
+                    let evenings = [];
+                    day.forEach(hour => {
+                        if (new Date(hour["datetimeStr"]) <= new Date(hour["datetimeStr"]).setHours(6, 0, 0)) {
+                            mornings.push(hour);
+                        } else {
+                            evenings.push(hour);
+                        }
+                    })
+                    return [mornings, evenings]
+                }, [])
+                console.log(groupedByTime)
+                setWeeklyTempsByTime(groupedByTime)
+                // groupedByDay.forEach(day => {
+                //     let mornings = [];
+                //     let evenings = [];
+                //     day.forEach(hour => {
+                //         if (new Date(hour["datetimeStr"]) <= new Date(hour["datetimeStr"]).setHours(6, 0, 0)) {
+                //             mornings.push(hour);
+                //         } else {
+                //             evenings.push(hour);
+                //         }
+                //     })
+                // })
             }
         }
     }, [responseData])
