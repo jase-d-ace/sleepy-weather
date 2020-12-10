@@ -7,7 +7,7 @@ function App() {
     const [locationString, setLocationString] = useState(null);
     const [responseData, setResponseData] = useState(null);
     const [weeklyTempsByTime, setWeeklyTempsByTime] = useState(null)
-    // const [weeklyHighsAndLows, setWeeklyHighsAndLows] = useState(null)
+    const [weeklyHighsAndLows, setWeeklyHighsAndLows] = useState(null)
     const [overnights, setOvernights] = useState(null)
     const [error, setError] = useState(null);
 
@@ -17,12 +17,6 @@ function App() {
                 setError(responseData);
                 setResponseData(null);
             } else {
-                // let valuesArray = responseData.values;
-                // // strip away temperatures in the middle of the day and only care about overnight hours (i.e. between 6pm-6am)
-                // // let relevantTemps = valuesArray.filter(({ datetimeStr }) => new Date(datetimeStr) <= new Date(datetimeStr).setHours(6, 0, 0) || (new Date(datetimeStr) >= new Date(datetimeStr).setHours(18, 0, 0) && new Date(datetimeStr) <= new Date(datetimeStr).setHours(23, 0, 0)))
-                // console.log('combined relevent temperatures:', relevantTemps)
-                // setWeeklyTempsByTime(relevantTemps)
-
                 // https://codereview.stackexchange.com/questions/111704/group-similar-objects-into-array-of-arrays
                 // group relevant hourly data by day, to be parsed again into morning and evening hours later
                 const hourHash = responseData.relevantTemps.reduce((hash, hour) => {
@@ -31,6 +25,8 @@ function App() {
                     return hash;
                 }, {});
                 const groupedByDay = Object.keys(hourHash).map(hour => hourHash[hour]);
+                // unorganized array of arrays of objects ordered by datetime ascending for 8 days
+                setWeeklyHighsAndLows(groupedByDay)
 
                 const groupedByTime = groupedByDay.map((day) => {
                     let mornings = [];
@@ -43,20 +39,9 @@ function App() {
                         }
                     })
                     return [mornings, evenings]
-                }, [])
-                console.log(groupedByTime)
+                })
+                // array of arrays of two-array pairs grouping days of weather data into morning or evening data
                 setWeeklyTempsByTime(groupedByTime)
-                // groupedByDay.forEach(day => {
-                //     let mornings = [];
-                //     let evenings = [];
-                //     day.forEach(hour => {
-                //         if (new Date(hour["datetimeStr"]) <= new Date(hour["datetimeStr"]).setHours(6, 0, 0)) {
-                //             mornings.push(hour);
-                //         } else {
-                //             evenings.push(hour);
-                //         }
-                //     })
-                // })
             }
         }
     }, [responseData])
