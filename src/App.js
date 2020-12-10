@@ -42,6 +42,25 @@ function App() {
                 })
                 // array of arrays of two-array pairs grouping days of weather data into morning or evening data
                 setWeeklyTempsByTime(groupedByTime)
+                const drilledDown = groupedByTime.map((timebuckets) => {
+                    // array of temperatures per hour grouped by time bucket
+                    const highsAndLowsPerBucket = timebuckets.map(bucket => bucket.map(hour => hour["temp"]));
+                    return {
+                        morning: {
+                            high: highsAndLowsPerBucket[0].length ? Math.max(...highsAndLowsPerBucket[0]) : null,
+                            low: highsAndLowsPerBucket[0].length ? Math.min(...highsAndLowsPerBucket[0]) : null,
+                        },
+                        evening: {
+                            high: Math.max(...highsAndLowsPerBucket[1]),
+                            low: Math.max(...highsAndLowsPerBucket[1])
+                        },
+                        day: timebuckets[1][0]["datetimeStr"].split("T")[0]
+                    }
+
+                })
+
+                // aggregate array of objects that hold morning high and low for each day
+                setOvernights(drilledDown)
             }
         }
     }, [responseData])
