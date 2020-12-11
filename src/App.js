@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
-import { handleFormSubmit, handleFormInput } from './services';
+import { handleFormSubmit, handleFormInput, getMonth, getDay, getDate } from './services';
 
 function App() {
     const [locationString, setLocationString] = useState(null);
@@ -37,9 +37,9 @@ function App() {
                         } else {
                             evenings.push(hour);
                         }
-                    })
+                    });
                     return [mornings, evenings]
-                })
+                });
                 // array of arrays of two-array pairs grouping days of weather data into morning or evening data
                 setWeeklyTempsByTime(groupedByTime)
                 const drilledDown = groupedByTime.map((timebuckets) => {
@@ -54,9 +54,8 @@ function App() {
                             high: Math.max(...highsAndLowsPerBucket[1]),
                             low: Math.max(...highsAndLowsPerBucket[1])
                         },
-                        day: timebuckets[1][0]["datetimeStr"].split("T")[0]
+                        day: new Date(timebuckets[1][0]["datetime"])
                     }
-
                 })
 
                 // aggregate array of objects that hold morning high and low for each day
