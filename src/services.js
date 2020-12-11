@@ -1,4 +1,10 @@
 const API_BASE_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?"
+const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+export const getDay = (timestamp) => days[new Date(timestamp).getDay()];
+export const getMonth = (timestamp) => months[new Date(timestamp).getMonth()];
+export const getDate = (timestamp) => new Date(timestamp).getDate();
 
 export const handleFormSubmit = (e, locationString, callback) => {
     e.preventDefault()
