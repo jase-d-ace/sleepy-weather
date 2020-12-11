@@ -32,7 +32,7 @@ function App() {
                     let mornings = [];
                     let evenings = [];
                     day.forEach(hour => {
-                        if (new Date(hour["datetimeStr"]) <= new Date(hour["datetimeStr"]).setHours(6, 0, 0)) {
+                        if (new Date(hour["datetime"]) <= new Date(hour["datetime"]).setHours(6, 0, 0)) {
                             mornings.push(hour);
                         } else {
                             evenings.push(hour);
