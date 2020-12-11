@@ -71,6 +71,7 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
+                {responseData ? responseData.address ? overnights ? (<h1>{`${getDay(overnights[0].day)}, ${getMonth(overnights[0].day)} ${getDate(overnights[0].day)}`}</h1>) : (<h1>Hello!</h1>) : (<h1>Loading...</h1>) : (<h1>Ready for Action!</h1>)}
                 <form onSubmit={(e) => handleFormSubmit(e, locationString, setResponseData)}>
                     <input type="text" placeholder="enter location" onChange={(e) => handleFormInput(setLocationString, e.target.value)} />
                     <input type="submit" value="Click me" />
