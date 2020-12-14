@@ -27,14 +27,14 @@ function App() {
                     return hash;
                 }, {});
                 const groupedByDay = Object.keys(hourHash).map(hour => hourHash[hour]);
-                // unorganized array of arrays of objects ordered by datetime ascending for 8 days
-                setWeeklyHighsAndLows(groupedByDay)
+                //unorganized array of arrays of objects ordered by datetime ascending for 8 days
+                setWeeklyHighsAndLows(hourHash)
 
                 const groupedByTime = groupedByDay.map((day) => {
                     let mornings = [];
                     let evenings = [];
                     day.forEach(hour => {
-                        if (new Date(hour["datetime"]) <= new Date(hour["datetime"]).setHours(6, 0, 0)) {
+                        if (new Date(hour.datetime) <= new Date(hour.datetime - (5 * 60 * 60 * 1000)).setHours(6, 0, 0)) {
                             mornings.push(hour);
                         } else {
                             evenings.push(hour);
@@ -42,7 +42,7 @@ function App() {
                     });
                     return [mornings, evenings]
                 });
-                // array of arrays of two-array pairs grouping days of weather data into morning or evening data
+                // array of arrays of two - array pairs grouping days of weather data into morning or evening data
                 setWeeklyTempsByTime(groupedByTime)
                 const drilledDown = groupedByTime.map((timebuckets) => {
                     // array of temperatures per hour grouped by time bucket
