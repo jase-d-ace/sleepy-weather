@@ -22,13 +22,13 @@ function App() {
                 // https://codereview.stackexchange.com/questions/111704/group-similar-objects-into-array-of-arrays
                 // group relevant hourly data by day, to be parsed again into morning and evening hours later
                 const hourHash = responseData.relevantTemps.reduce((hash, hour) => {
-                    if (!hash.hasOwnProperty(hour["datetimeStr"].split("T")[0])) hash[hour["datetimeStr"].split("T")[0]] = [];
-                    hash[hour["datetimeStr"].split("T")[0]].push(hour);
+                    if (!hash.hasOwnProperty(new Date(hour.datetime).getDate())) hash[new Date(hour.datetime).getDate()] = [];
+                    hash[new Date(hour.datetime).getDate()].push(hour);
                     return hash;
                 }, {});
-                const groupedByDay = Object.keys(hourHash).map(hour => hourHash[hour]);
+                const groupedByDay = Object.keys(hourHash).map(hour => hourHash[hour])
                 //unorganized array of arrays of objects ordered by datetime ascending for 8 days
-                setWeeklyHighsAndLows(hourHash)
+                setWeeklyHighsAndLows(groupedByDay)
 
                 const groupedByTime = groupedByDay.map((day) => {
                     let mornings = [];
