@@ -1,10 +1,10 @@
 import { getMonth, getDay, getDate } from './services'
 // const [hourlyWeather, setHourlyWeather] = useState(null)
 
-function HourlyRow({ morning, evening, day }) {
+function HourlyRow({ high, low, day }) {
     return (<li>
         <h1>{getDay(day)}, {getMonth(day)}, {getDate(day)}</h1>
-        {evening.low} Degrees
+        Overnight High: {high} Degrees, Overnight Low: {low} Degrees
     </li>)
 }
 
