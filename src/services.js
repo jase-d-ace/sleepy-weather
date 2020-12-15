@@ -8,7 +8,7 @@ export const getDate = (timestamp) => new Date(timestamp).getDate();
 
 export const handleFormSubmit = (e, locationString, callback) => {
     e.preventDefault()
-    fetch(`${API_BASE_URL}locations=${locationString}&aggregateHours=1&unitGroup=us&forecastDays=8&shortColumnNames=false&contentType=json&key=${process.env.REACT_APP_API_KEY}`)
+    fetch(`${API_BASE_URL}locations=${locationString}&aggregateHours=1&unitGroup=us&forecastDays=6&shortColumnNames=false&contentType=json&key=${process.env.REACT_APP_API_KEY}`)
         .then(data => data.json())
         .then((json) => {
             if (json.locations) {
