@@ -7,7 +7,7 @@ function DailyCard({ overnights }) {
             <h1>We have a right column!</h1>
             <ul>
                 {
-                    overnights.map(night => <HourlyRow {...night} />)
+                    overnights.map(night => < HourlyRow key={night["day"]} {...night} />)
                 }
             </ul>
         </div>
