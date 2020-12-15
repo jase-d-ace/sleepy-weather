@@ -56,7 +56,7 @@ function App() {
                             high: Math.max(...highsAndLowsPerBucket[1]),
                             low: Math.max(...highsAndLowsPerBucket[1])
                         },
-                        // day: new Date(timebuckets[1][0]["datetime"])
+                        day: timebuckets[0].length ? new Date(timebuckets[0][0]["datetime"]) : new Date(timebuckets[1][0]["datetime"])
                     }
                 })
 
