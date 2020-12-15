@@ -28,3 +28,18 @@ export const handleFormSubmit = (e, locationString, callback) => {
 export const handleFormInput = (callback, callbackArg) => callback(callbackArg)
 
 export const compareTemps = (obj, obj2, time) => time === "high" ? Math.max(obj[time], obj2[time]) : Math.min(obj[time], obj2[time])
+
+export const getOvernightMetrics = (weekArray) => {
+    let overnightTemperatures = [];
+    let loopLength = weekArray.length - 1 // Do not loop the final day since we don't have nextMorning data
+    weekArray.slice(0, loopLength).forEach((day, index) => {
+        let overnight = {};
+        let night = day.evening;
+        let nextMorning = weekArray[index + 1].morning;
+        overnight["day"] = day.day;
+        overnight["high"] = compareTemps(night, nextMorning, "high");
+        overnight["low"] = compareTemps(night, nextMorning, "low");
+        overnightTemperatures.push(overnight)
+    })
+    return overnightTemperatures;
+};
