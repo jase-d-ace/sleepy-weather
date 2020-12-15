@@ -3,7 +3,7 @@ import { getMonth, getDay, getDate } from './services'
 
 function HourlyRow({ high, low, day }) {
     return (<li>
-        <h1>{getDay(day)}, {getMonth(day)}, {getDate(day)}</h1>
+        <p>{getDay(day)}, {getMonth(day)}, {getDate(day)}</p>
         Overnight High: {high} Degrees, Overnight Low: {low} Degrees
     </li>)
 }
