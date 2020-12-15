@@ -34,9 +34,9 @@ function App() {
                     let mornings = [];
                     let evenings = [];
                     day.forEach(hour => {
-                        if (new Date(hour.datetime) <= new Date(hour.datetime - (5 * 60 * 60 * 1000)).setHours(6, 0, 0)) {
+                        if (new Date(hour.datetime).getHours() <= 6) {
                             mornings.push(hour);
-                        } else {
+                        } else if ((new Date(hour.datetime) >= new Date(hour.datetime - (5 * 60 * 60 * 1000)).setHours(18, 0, 0) && new Date(hour.datetime) <= new Date(hour.datetime - (5 * 60 * 60 * 1000)).setHours(23, 0, 0))) {
                             evenings.push(hour);
                         }
                     });
@@ -56,7 +56,7 @@ function App() {
                             high: Math.max(...highsAndLowsPerBucket[1]),
                             low: Math.max(...highsAndLowsPerBucket[1])
                         },
-                        day: new Date(timebuckets[1][0]["datetime"])
+                        // day: new Date(timebuckets[1][0]["datetime"])
                     }
                 })
 
