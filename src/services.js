@@ -26,3 +26,5 @@ export const handleFormSubmit = (e, locationString, callback) => {
 }
 
 export const handleFormInput = (callback, callbackArg) => callback(callbackArg)
+
+export const compareTemps = (obj, obj2, time) => time === "high" ? Math.max(obj[time], obj2[time]) : Math.min(obj[time], obj2[time])
