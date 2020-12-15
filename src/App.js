@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
-import { handleFormSubmit, handleFormInput, getMonth, getDay, getDate } from './services';
+import { handleFormSubmit, handleFormInput, getOvernightMetrics } from './services';
 import DailyCard from './DailyCard';
 // import DailyRow from './DailyRow';
 
@@ -27,7 +27,7 @@ function App() {
                     return hash;
                 }, {});
                 const groupedByDay = Object.keys(hourHash).map(hour => hourHash[hour])
-                //unorganized array of arrays of objects ordered by datetime ascending for 8 days
+                //array of arrays of objects where each sub-array is one day's worth of 12a-6a and 6p-11p weather data
                 setWeeklyHighsAndLows(groupedByDay)
 
                 const groupedByTime = groupedByDay.map((day) => {
@@ -42,8 +42,10 @@ function App() {
                     });
                     return [mornings, evenings]
                 });
-                // array of arrays of two - array pairs grouping days of weather data into morning or evening data
+                // array of arrays of tuple arrays, where each individual part of the tuple is a grouping of hours for a given day for the week
                 setWeeklyTempsByTime(groupedByTime)
+
+                // array of objects that reduces the above information into a high and low temperature
                 const drilledDown = groupedByTime.map((timebuckets) => {
                     // array of temperatures per hour grouped by time bucket
                     const highsAndLowsPerBucket = timebuckets.map(bucket => bucket.map(hour => hour["temp"]));
@@ -60,8 +62,8 @@ function App() {
                     }
                 })
 
-                // aggregate array of objects that hold morning high and low for each day
-                setOvernights(drilledDown)
+                // array of objects that has already compared the highs and lows of the array, and has returned the highest and lowest temp of the comparisons 
+                setOvernights(getOvernightMetrics(drilledDown))
             }
         }
     }, [responseData])
