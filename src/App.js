@@ -39,7 +39,7 @@ function App() {
                             mornings.push(hour);
                         } else if (
                             new Date(hour.datetime) >=
-                                new Date(hour.datetime - 5 * 60 * 60 * 1000).setHours(18, 0, 0) &&
+                            new Date(hour.datetime - 5 * 60 * 60 * 1000).setHours(18, 0, 0) &&
                             new Date(hour.datetime) <= new Date(hour.datetime - 5 * 60 * 60 * 1000).setHours(23, 0, 0)
                         ) {
                             evenings.push(hour);
@@ -97,14 +97,14 @@ function App() {
                     Your location:
                 </div>
                 <div className="WeatherApp__results">
-                    <div class="WeatherApp__week">
+                    <div className="WeatherApp__week">
                         {days.map((day, i) => (
                             <DailyRow
                                 key={i}
                             />
                         ))}
                     </div>
-                    <div class="WeatherApp__day">
+                    <div className="WeatherApp__day">
                         <div>
                             Active day summary
                         </div>
