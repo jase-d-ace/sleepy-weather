@@ -1,22 +1,24 @@
 import './DailyRow.scss';
+import { getDay, getDate, getMonth } from '../../services'
 
-function DailyRow({ overnights }) {
+function DailyRow({ conditions, datetime, maxt, mint, humidity, precip }) {
+
     return (
         <div className="DailyRow">
             <div>
-                12/6
+                {getMonth(datetime)}/{getDate(datetime)}
             </div>
             <div>
-                Tue
+                {getDay(datetime)}
             </div>
             <div>
-                24/19
+                {maxt}/{mint}
             </div>
             <div>
                 19
             </div>
             <div>
-                Snowy
+                {conditions}
             </div>
             <div>
                 🌨️
