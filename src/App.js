@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
 import { handleFormSubmit, handleFormInput, getOvernightMetrics } from './services';
-import DailyCard from './DailyCard';
+import DailyCard from 'components/DailyCard/DailyCard';
 // import DailyRow from './DailyRow';
 
 function App() {
@@ -62,29 +62,21 @@ function App() {
                     }
                 })
 
-                // array of objects that has already compared the highs and lows of the array, and has returned the highest and lowest temp of the comparisons 
+                // array of objects that has already compared the highs and lows of the array, and has returned the highest and lowest temp of the comparisons
                 setOvernights(getOvernightMetrics(drilledDown))
             }
         }
     }, [responseData])
-
-
-
-
     return (
         <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-
                 <form onSubmit={(e) => handleFormSubmit(e, locationString, setResponseData)}>
                     <input type="text" placeholder="enter location" onChange={(e) => handleFormInput(setLocationString, e.target.value)} />
                     <input type="submit" value="Click me" />
                 </form>
-                {
-                    overnights &&
+                {overnights &&(
                     <DailyCard overnights={overnights} />
-                }
-
+                )}
             </header>
         </div>
     );

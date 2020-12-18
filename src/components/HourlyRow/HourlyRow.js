@@ -1,4 +1,4 @@
-import { getMonth, getDay, getDate } from './services'
+import { getMonth, getDay, getDate } from '../../services'
 // const [hourlyWeather, setHourlyWeather] = useState(null)
 
 function HourlyRow({ high, low, day }) {
