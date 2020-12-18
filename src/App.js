@@ -96,15 +96,17 @@ function App() {
 
                 </div>
                 <div className="WeatherApp__current">
-                    Your location:
+                    Your location: {responseData && responseData.address}
                 </div>
                 <div className="WeatherApp__results">
                     <div className="WeatherApp__week">
-                        {days.map((day, i) => (
-                            <DailyRow
-                                key={i}
-                            />
-                        ))}
+                        {responseData &&
+                            responseData.weeklyValues.map((day, i) => (
+                                <DailyRow
+                                    key={i}
+                                    {...day}
+                                />
+                            ))}
                     </div>
                     <div className="WeatherApp__day">
                         <div>
