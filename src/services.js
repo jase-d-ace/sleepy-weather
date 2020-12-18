@@ -21,6 +21,11 @@ export const getDate = (timestamp) => new Date(timestamp).getDate();
 
 export const handleFormSubmit = (e, locationString, callback) => {
     e.preventDefault();
+    //https://stackoverflow.com/questions/59037553/fetch-multiple-urls-at-the-same-time
+    const promiseObject = Promise.all([
+        fetch(`${API_BASE_URL}locations=${locationString}&aggregateHours=1&unitGroup=us&forecastDays=6&shortColumnNames=false&contentType=json&key=${process.env.REACT_APP_API_KEY}`).then(res => res.json()),
+        fetch(`${API_BASE_URL}locations=${locationString}&aggregateHours=24&unitGroup=us&forecastDays=6&shortColumnNames=false&contentType=json&key=${process.env.REACT_APP_API_KEY}`).then(res => res.json())
+    ]).then(data => console.log(data));
     fetch(
         `${API_BASE_URL}locations=${locationString}&aggregateHours=1&unitGroup=us&forecastDays=6&shortColumnNames=false&contentType=json&key=${process.env.REACT_APP_API_KEY}`
     )
