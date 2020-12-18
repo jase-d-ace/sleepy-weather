@@ -32,9 +32,22 @@ body {
 }
 
 .WeatherApp {
+    &__header {
+        border: 1px solid grey;
+    }
+
     &__results {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: 1em;
+        height: 100%;
+    }
+
+    &__week {
+        border: 1px solid grey;
+    }
+
+    &__day {
+        border: 1px solid grey;
     }
 }
