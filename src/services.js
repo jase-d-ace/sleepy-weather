@@ -22,32 +22,32 @@ export const getDate = (timestamp) => new Date(timestamp).getDate();
 export const handleFormSubmit = (e, locationString, callback) => {
     e.preventDefault();
     //https://stackoverflow.com/questions/59037553/fetch-multiple-urls-at-the-same-time
-    const promiseObject = Promise.all([
-        fetch(`${API_BASE_URL}locations=${locationString}&aggregateHours=1&unitGroup=us&forecastDays=6&shortColumnNames=false&contentType=json&key=${process.env.REACT_APP_API_KEY}`).then(res => res.json()),
-        fetch(`${API_BASE_URL}locations=${locationString}&aggregateHours=24&unitGroup=us&forecastDays=6&shortColumnNames=false&contentType=json&key=${process.env.REACT_APP_API_KEY}`).then(res => res.json())
-    ]).then(data => console.log(data));
-    fetch(
-        `${API_BASE_URL}locations=${locationString}&aggregateHours=1&unitGroup=us&forecastDays=6&shortColumnNames=false&contentType=json&key=${process.env.REACT_APP_API_KEY}`
-    )
-        .then((data) => data.json())
-        .then((json) => {
-            if (json.locations) {
-                const { locations } = json;
-                // results from this api are bound to a dynamically generated key that is equal to whatever the location the user searched for, e.g. "troy,ny" or a pair of lon/lat coordinates
-                let locationKey = Object.keys(locations)[0];
-                const { address, values, currentConditions } = locations[locationKey];
-                let relevantTemps = values.filter(
-                    ({ datetime }) =>
-                        new Date(datetime) <= new Date(datetime - 5 * 60 * 60 * 1000).setHours(6, 0, 0) ||
-                        (new Date(datetime) >= new Date(datetime - 5 * 60 * 60 * 1000).setHours(18, 0, 0) &&
-                            new Date(datetime - 5 * 60 * 60 * 1000) <= new Date(datetime).setHours(23, 0, 0))
-                );
-                callback({ address, relevantTemps, currentConditions });
-            } else {
-                callback(json);
-            }
+    Promise.all([
+        fetch(`${API_BASE_URL}locations=${locationString}&aggregateHours=1&unitGroup=us&forecastDays=6&shortColumnNames=false&contentType=json&key=${process.env.REACT_APP_API_KEY}`)
+            .then(res => res.json())
+            .catch(err => err),
+        fetch(`${API_BASE_URL}locations=${locationString}&aggregateHours=24&unitGroup=us&forecastDays=6&shortColumnNames=false&contentType=json&key=${process.env.REACT_APP_API_KEY}`)
+            .then(res => res.json())
+            .catch(err => err)
+    ])
+        .then(([hourly, weekly]) => {
+            const { locations: hourlyTemps } = hourly;
+            let locationKey = Object.keys(hourlyTemps)[0];
+            const { address, values, currentConditions } = hourlyTemps[locationKey];
+            let relevantTemps = values.filter(
+                ({ datetime }) =>
+                    new Date(datetime) <= new Date(datetime - 5 * 60 * 60 * 1000).setHours(6, 0, 0) ||
+                    (new Date(datetime) >= new Date(datetime - 5 * 60 * 60 * 1000).setHours(18, 0, 0) &&
+                        new Date(datetime - 5 * 60 * 60 * 1000) <= new Date(datetime).setHours(23, 0, 0))
+            );
+
+            const { locations: weeklyTemps } = weekly;
+            let weeklyLocationKey = Object.keys(weeklyTemps)[0];
+            const { values: weeklyValues } = weeklyTemps[weeklyLocationKey];
+            console.log(weeklyValues)
+            callback({ address, relevantTemps, currentConditions, weeklyValues });
         })
-        .catch((err) => callback(err));
+        .catch(err => callback(err));
 };
 
 export const handleFormInput = (callback, callbackArg) => callback(callbackArg);
