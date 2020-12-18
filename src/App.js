@@ -8,8 +8,9 @@ import "styles/global.scss";
 function App() {
     const [locationString, setLocationString] = useState(null);
     const [responseData, setResponseData] = useState(null);
-    const [weeklyTempsByTime, setWeeklyTempsByTime] = useState(null);
-    const [weeklyHighsAndLows, setWeeklyHighsAndLows] = useState(null);
+    const [dailyTempsByTimebucket, setDailyTempsByTimebucket] = useState(null);
+    const [hourlyTempsByDay, setHourlyTempsByDay] = useState(null);
+    const [weeklyTempsByDay, setWeeklyTempsByDay] = useState(null);
     const [overnights, setOvernights] = useState(null);
     const [error, setError] = useState(null);
 
@@ -19,6 +20,7 @@ function App() {
                 setError(responseData);
                 setResponseData(null);
             } else {
+                setWeeklyTempsByDay(responseData.weeklyValues)
                 // https://codereview.stackexchange.com/questions/111704/group-similar-objects-into-array-of-arrays
                 // group relevant hourly data by day, to be parsed again into morning and evening hours later
                 const hourHash = responseData.relevantTemps.reduce((hash, hour) => {
@@ -29,7 +31,7 @@ function App() {
                 }, {});
                 const groupedByDay = Object.keys(hourHash).map((hour) => hourHash[hour]);
                 //array of arrays of objects where each sub-array is one day's worth of 12a-6a and 6p-11p weather data
-                setWeeklyHighsAndLows(groupedByDay);
+                setHourlyTempsByDay(groupedByDay);
 
                 const groupedByTime = groupedByDay.map((day) => {
                     let mornings = [];
@@ -48,7 +50,7 @@ function App() {
                     return [mornings, evenings];
                 });
                 // array of arrays of tuple arrays, where each individual part of the tuple is a grouping of hours for a given day for the week
-                setWeeklyTempsByTime(groupedByTime);
+                setDailyTempsByTimebucket(groupedByTime);
 
                 // array of objects that reduces the above information into a high and low temperature
                 const drilledDown = groupedByTime.map((timebuckets) => {
