@@ -7,14 +7,27 @@
     // border: 1px solid grey;
     padding: 0.7em;
 }
+
 span.high {
-    font-weight: bold;
+    font-weight: bolder;
     font-size: 1.3em;
     color: cornflowerblue;
+}
+
+span.date {
+    position: relative;
+    padding-right: 0.3em;
+    top: 5px;
 }
 
 span.low {
     font-weight: thin;
     font-size: 0.67em;
     color: #868686;
+}
+
+span.overnight {
+    font-weight: bold;
+    font-size: 1em;
+    color: #F9F5FF;
 }
