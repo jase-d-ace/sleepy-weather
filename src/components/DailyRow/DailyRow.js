@@ -13,7 +13,7 @@ function DailyRow({ conditions, datetime, maxt, mint, humidity, precip }) {
             </div>
 
             <div>
-                {maxt}/{mint}
+                <span className="high">{maxt}</span>/<span className="low">{mint}</span>
             </div>
             <div>
                 19
