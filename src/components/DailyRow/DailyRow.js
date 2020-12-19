@@ -6,11 +6,12 @@ function DailyRow({ conditions, datetime, maxt, mint, humidity, precip }) {
     return (
         <div className="DailyRow">
             <div>
-                {getMonth(datetime)}/{getDate(datetime)}
-            </div>
-            <div>
                 {getDay(datetime)}
             </div>
+            <div>
+                {getMonth(datetime)} {getDate(datetime)}
+            </div>
+
             <div>
                 {maxt}/{mint}
             </div>
