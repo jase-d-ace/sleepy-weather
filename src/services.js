@@ -44,7 +44,6 @@ export const handleFormSubmit = (e, locationString, callback) => {
             const { locations: weeklyTemps } = weekly;
             let weeklyLocationKey = Object.keys(weeklyTemps)[0];
             const { values: weeklyValues } = weeklyTemps[weeklyLocationKey];
-            console.log(weeklyValues)
             callback({ address, relevantTemps, currentConditions, weeklyValues });
         })
         .catch(err => callback(err));
