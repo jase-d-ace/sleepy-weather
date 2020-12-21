@@ -15,6 +15,7 @@ function App() {
     const [overnights, setOvernights] = useState(null);
     const [activeDay, setActiveDay] = useState(null);
     const [activeDayOvernights, setActiveDayOvernights] = useState(null);
+    const [activeDayHourly, setActiveDayHourly] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -36,6 +37,7 @@ function App() {
                 const groupedByDay = Object.keys(hourHash).map((hour) => hourHash[hour]);
                 //array of arrays of objects where each sub-array is one day's worth of 12a-6a and 6p-11p weather data
                 setHourlyTempsByDay(groupedByDay);
+                setActiveDayHourly(groupedByDay[0]);
 
                 const groupedByTime = groupedByDay.map((day) => {
                     let mornings = [];
@@ -77,7 +79,7 @@ function App() {
 
                 // array of objects that has already compared the highs and lows of the array, and has returned the highest and lowest temp of the comparisons
                 setOvernights(getOvernightMetrics(drilledDown));
-                setActiveDayOvernights(getOvernightMetrics(drilledDown)[0])
+                setActiveDayOvernights(getOvernightMetrics(drilledDown)[0]);
             }
         }
     }, [responseData]);
@@ -123,7 +125,11 @@ function App() {
                         </div>
                         {
                             overnights &&
-                            <DailyCard {...activeDay} {...activeDayOvernights} />
+                            <DailyCard
+                                {...activeDay}
+                                {...activeDayOvernights}
+                                hourly={activeDayHourly}
+                            />
                         }
 
                     </div>
