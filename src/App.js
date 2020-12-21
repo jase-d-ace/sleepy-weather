@@ -101,12 +101,15 @@ function App() {
                 <div className="WeatherApp__results">
                     <div className="WeatherApp__week">
                         {responseData &&
+                            overnights &&
                             responseData.weeklyValues.map((day, i) => (
                                 <DailyRow
-                                    key={i}
+                                    key={overnights[i].day}
                                     {...day}
+                                    {...overnights[i]}
                                 />
-                            ))}
+                            ))
+                        }
                     </div>
                     <div className="WeatherApp__day">
                         <div>
