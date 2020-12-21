@@ -2,7 +2,7 @@ import HourlyRow from 'components/HourlyRow/HourlyRow'
 import { getDay, getDate, getMonth } from '../../services'
 
 
-function DailyCard({ high, low, day }) {
+function DailyCard({ high, low, day, hourly }) {
     return (
         <div className="DailyCard">
             <div className="DailyCard__summary">
@@ -17,11 +17,30 @@ function DailyCard({ high, low, day }) {
             <div className="summary-advice">
                 It's gonna be chilly, break out the fuzzies and comforter!
                 </div>
-            {/* <ul>
-                {
-                    overnights.map(night => < HourlyRow key={night["day"]} {...night} />)
-                }
-            </ul> */}
+            <ul>
+                <li className="DailyCard__hourly">
+                    <div className="hour">
+                        <div>
+                            6pm
+                        </div>
+                        <div>
+                            24F
+                        </div>
+                        <div>
+                            Clear Skies
+                        </div>
+                        <div>
+                            🌨️
+                    </div>
+                    </div>
+
+
+                </li>
+
+                {/* {
+                    hourly.map(hour => < HourlyRow key={hour["datetime"]} {...hour} />)
+                } */}
+            </ul>
         </div>
 
     )
