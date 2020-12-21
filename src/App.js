@@ -3,6 +3,7 @@ import { days, handleFormSubmit, handleFormInput, getOvernightMetrics } from "./
 import DailyCard from "components/DailyCard/DailyCard";
 import DailyRow from "components/DailyRow/DailyRow";
 
+import "components/DailyCard/DailyCard.scss"
 import "styles/global.scss";
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
     const [hourlyTempsByDay, setHourlyTempsByDay] = useState(null);
     const [weeklyTempsByDay, setWeeklyTempsByDay] = useState(null);
     const [overnights, setOvernights] = useState(null);
+    const [activeDay, setActiveDay] = useState(null);
+    const [activeDayOvernights, setActiveDayOvernights] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -21,6 +24,7 @@ function App() {
                 setResponseData(null);
             } else {
                 setWeeklyTempsByDay(responseData.weeklyValues)
+                setActiveDay(responseData.weeklyValues[0])
                 // https://codereview.stackexchange.com/questions/111704/group-similar-objects-into-array-of-arrays
                 // group relevant hourly data by day, to be parsed again into morning and evening hours later
                 const hourHash = responseData.relevantTemps.reduce((hash, hour) => {
@@ -77,7 +81,6 @@ function App() {
         }
     }, [responseData]);
 
-
     return (
         <div className="App">
             <div className="WeatherApp">
@@ -105,6 +108,7 @@ function App() {
                             responseData.weeklyValues.map((day, i) => (
                                 <DailyRow
                                     key={overnights[i].day}
+                                    {...setActiveDay}
                                     {...day}
                                     {...overnights[i]}
                                 />
@@ -112,12 +116,28 @@ function App() {
                         }
                     </div>
                     <div className="WeatherApp__day">
-                        <div>
-                            Active day summary
+                        <div className="DailyCard">
+                            <div className="DailyCard__summary">
+                                <div className="summary-date">
+                                    12/21
+                                </div>
+                                <div className="summary-overnights">
+                                    Overnight Temps: 35/22
+                                </div>
+                                <div className="summary-advice">
+                                    It's gonna be chilly, break out the fuzzies and comforter!
+                                </div>
+                            </div>
                         </div>
+
                         <div>
                             Active day hourly rows
                         </div>
+                        {/* {
+                            overnights &&
+                            <DailyCard {...activeDay} />
+                        } */}
+
                     </div>
                 </div>
             </div>
