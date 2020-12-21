@@ -77,6 +77,7 @@ function App() {
 
                 // array of objects that has already compared the highs and lows of the array, and has returned the highest and lowest temp of the comparisons
                 setOvernights(getOvernightMetrics(drilledDown));
+                setActiveDayOvernights(getOvernightMetrics(drilledDown)[0])
             }
         }
     }, [responseData]);
@@ -116,27 +117,14 @@ function App() {
                         }
                     </div>
                     <div className="WeatherApp__day">
-                        <div className="DailyCard">
-                            <div className="DailyCard__summary">
-                                <div className="summary-date">
-                                    12/21
-                                </div>
-                                <div className="summary-overnights">
-                                    Overnight Temps: 35/22
-                                </div>
-                                <div className="summary-advice">
-                                    It's gonna be chilly, break out the fuzzies and comforter!
-                                </div>
-                            </div>
-                        </div>
 
                         <div>
                             Active day hourly rows
                         </div>
-                        {/* {
+                        {
                             overnights &&
-                            <DailyCard {...activeDay} />
-                        } */}
+                            <DailyCard {...activeDay} {...activeDayOvernights} />
+                        }
 
                     </div>
                 </div>
