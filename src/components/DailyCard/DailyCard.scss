@@ -4,4 +4,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0.6em;
+};
+
+.hour {
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
 }
