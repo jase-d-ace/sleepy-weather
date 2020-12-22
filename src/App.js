@@ -111,7 +111,6 @@ function App() {
                             responseData.weeklyValues.map((day, i) => (
                                 <DailyRow
                                     key={overnights[i].day}
-                                    {...setActiveDay}
                                     {...day}
                                     {...overnights[i]}
                                 />
