@@ -15,6 +15,8 @@ const months = [
     "December",
 ];
 
+export const TIMEZONE_DIFFERENCE = 18000000
+
 export const getDay = (timestamp) => days[new Date(timestamp).getDay()];
 export const getMonth = (timestamp) => months[new Date(timestamp).getMonth()];
 export const getDate = (timestamp) => new Date(timestamp).getDate();
@@ -36,9 +38,9 @@ export const handleFormSubmit = (e, locationString, callback) => {
             const { address, values, currentConditions } = hourlyTemps[locationKey];
             let relevantTemps = values.filter(
                 ({ datetime }) =>
-                    new Date(datetime) <= new Date(datetime - 5 * 60 * 60 * 1000).setHours(6, 0, 0) ||
-                    (new Date(datetime) >= new Date(datetime - 5 * 60 * 60 * 1000).setHours(18, 0, 0) &&
-                        new Date(datetime - 5 * 60 * 60 * 1000) <= new Date(datetime).setHours(23, 0, 0))
+                    new Date(datetime) <= new Date(datetime - TIMEZONE_DIFFERENCE).setHours(6, 0, 0) ||
+                    (new Date(datetime) >= new Date(datetime - TIMEZONE_DIFFERENCE).setHours(18, 0, 0) &&
+                        new Date(datetime - TIMEZONE_DIFFERENCE) <= new Date(datetime).setHours(23, 0, 0))
             );
 
             const { locations: weeklyTemps } = weekly;
