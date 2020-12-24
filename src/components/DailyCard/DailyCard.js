@@ -1,13 +1,13 @@
 import HourlyRow from 'components/HourlyRow/HourlyRow'
-import { getDay, getDate, getMonth } from '../../services'
+import { getDay, getDate, getMonth, TIMEZONE_DIFFERENCE } from '../../services'
 
 
-function DailyCard({ high, low, day, hourly }) {
+function DailyCard({ datetime, high, low, day, hourly }) {
     return (
         <div className="DailyCard">
             <div className="DailyCard__summary">
                 <div className="summary-date">
-                    {getDay(day)}, {getMonth(day)} {getDate(day)}
+                    {getDay(day - TIMEZONE_DIFFERENCE)}, {getMonth(day - TIMEZONE_DIFFERENCE)} {getDate(day - TIMEZONE_DIFFERENCE)}
                 </div>
                 <div className="summary-overnights">
                     Overnight: {high}/{low}

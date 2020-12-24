@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { days, handleFormSubmit, handleFormInput, getOvernightMetrics } from "./services";
+import { days, handleFormSubmit, handleFormInput, getOvernightMetrics, TIMEZONE_DIFFERENCE } from "./services";
 import DailyCard from "components/DailyCard/DailyCard";
 import DailyRow from "components/DailyRow/DailyRow";
 
@@ -47,8 +47,8 @@ function App() {
                             mornings.push(hour);
                         } else if (
                             new Date(hour.datetime) >=
-                            new Date(hour.datetime - 5 * 60 * 60 * 1000).setHours(18, 0, 0) &&
-                            new Date(hour.datetime) <= new Date(hour.datetime - 5 * 60 * 60 * 1000).setHours(23, 0, 0)
+                            new Date(hour.datetime - TIMEZONE_DIFFERENCE).setHours(18, 0, 0) &&
+                            new Date(hour.datetime) <= new Date(hour.datetime - TIMEZONE_DIFFERENCE).setHours(23, 0, 0)
                         ) {
                             evenings.push(hour);
                         }
@@ -79,7 +79,7 @@ function App() {
 
                 // array of objects that has already compared the highs and lows of the array, and has returned the highest and lowest temp of the comparisons
                 setOvernights(getOvernightMetrics(drilledDown));
-                setActiveDayOvernights(getOvernightMetrics(drilledDown)[0]);
+                setActiveDayOvernights(getOvernightMetrics(drilledDown)[1]);
             }
         }
     }, [responseData]);
@@ -112,7 +112,8 @@ function App() {
                                 <DailyRow
                                     key={overnights[i].day}
                                     {...day}
-                                    {...overnights[i]}
+                                    // send the next day's overnight because it was reporting the previous night's temperatures
+                                    {...overnights[i + 1]}
                                 />
                             ))
                         }
