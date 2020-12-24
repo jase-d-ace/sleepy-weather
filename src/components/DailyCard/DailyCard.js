@@ -18,28 +18,9 @@ function DailyCard({ datetime, high, low, day, hourly }) {
                 It's gonna be chilly, break out the fuzzies and comforter!
                 </div>
             <ul>
-                <li className="DailyCard__hourly">
-                    <div className="hour">
-                        <div>
-                            6pm
-                        </div>
-                        <div>
-                            24F
-                        </div>
-                        <div>
-                            Clear Skies
-                        </div>
-                        <div>
-                            🌨️
-                    </div>
-                    </div>
-
-
-                </li>
-
-                {/* {
+                {
                     hourly.map(hour => < HourlyRow key={hour["datetime"]} {...hour} />)
-                } */}
+                }
             </ul>
         </div>
 
