@@ -43,7 +43,7 @@ function App() {
                     let mornings = [];
                     let evenings = [];
                     day.forEach((hour) => {
-                        if (new Date(hour.datetime).getHours() <= 6) {
+                        if (new Date(hour.datetime - TIMEZONE_DIFFERENCE).getHours() <= 6) {
                             mornings.push(hour);
                         } else if (
                             new Date(hour.datetime) >=
@@ -79,7 +79,7 @@ function App() {
 
                 // array of objects that has already compared the highs and lows of the array, and has returned the highest and lowest temp of the comparisons
                 setOvernights(getOvernightMetrics(drilledDown));
-                setActiveDayOvernights(getOvernightMetrics(drilledDown)[1]);
+                setActiveDayOvernights(getOvernightMetrics(drilledDown)[0]);
             }
         }
     }, [responseData]);
@@ -113,7 +113,7 @@ function App() {
                                     key={overnights[i].day}
                                     {...day}
                                     // send the next day's overnight because it was reporting the previous night's temperatures
-                                    {...overnights[i + 1]}
+                                    {...overnights[i]}
                                 />
                             ))
                         }
