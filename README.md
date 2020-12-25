@@ -8,7 +8,7 @@
 
 [Visual Crossing Weather API](https://www.visualcrossing.com/resources/documentation/weather-api/weather-api-documentation/)
 
-## Notes so far (last updated 12/14/2020)
+## Notes so far (last updated 12/24/2020)
 
 * Inspiration: weather.com, accuweather.com, ny1.com
 * Common UX concepts:
@@ -17,3 +17,4 @@
   * Key information: Daily high/low temps, humidity, precipitation chance, wind speed
 * Will provide an "Overnight" metric that shows a high and low temp for the hours between 6p-6a for days in the next week
 * Timezones are not fun to deal with, and can lead to unexpected data issues
+* One of my bigger hurdles that I'm still looking to figure out is trying to align which overnight hours align with which days in the weekly forecast. The active day overnights (that shows the detailed hourly breakdown of one of the forecasted days) don't align with the weekly forecasted overnights, nor do the hourly breakdowns of each day support either of them. 
