@@ -50,4 +50,19 @@ body {
     &__day {
         border: 1px solid grey;
     }
+
+    &__mobile {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .WeatherApp__mobile {
+        display: flex;
+    }
+
+    .WeatherApp {
+        display: none;
+    }
+
 }
