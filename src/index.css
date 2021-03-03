@@ -9,23 +9,3 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
-
-.WeatherApp__Mobile {
-    display: none;
-}
-
-/* @media only screen and (device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
-
-    } */
-
-    @media only screen 
-    and (device-width : 414px) 
-    and (device-height : 736px) 
-    and (-webkit-device-pixel-ratio : 3) {
-        .WeatherApp__Mobile {
-            display: flex;
-        }
-        .WeatherApp {
-            display: none
-        }
-     }

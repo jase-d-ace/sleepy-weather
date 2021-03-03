@@ -135,9 +135,6 @@ function App() {
                     </div>
                 </div>
             </div>
-            <div className="WeatherApp__Mobile">
-                <h1>I RENDER ONLY ON MOBILE</h1>
-            </div>
         </div>
     );
 }
